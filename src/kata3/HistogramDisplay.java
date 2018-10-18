@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kata3;
 
 import java.awt.Dimension;
@@ -14,14 +9,14 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 
-/**
- *
- * @author Usuario
- */
 class HistogramDisplay extends ApplicationFrame{
     
-    public HistogramDisplay() {
+    private final Histogram <String> histogram;
+    
+    
+    public HistogramDisplay(Histogram <String> histogram) {
         super("HISTOGRAMA");
+        this.histogram = histogram;
         setContentPane(createPanel());
         pack();
     }
@@ -48,9 +43,9 @@ class HistogramDisplay extends ApplicationFrame{
     
     private DefaultCategoryDataset createDataSet(){
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-        dataSet.addValue(3,"","ulpgc.es");
-        dataSet.addValue(16,"","algo.es");
-        dataSet.addValue(20,"","algoDistinto.es");
+        for (String key : histogram.keySet()) {
+            dataSet.addValue(histogram.get(key),"",key);
+        }
         return dataSet;
     }
     
